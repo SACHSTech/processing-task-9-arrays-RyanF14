@@ -1,14 +1,22 @@
 import processing.core.PApplet;
 
+
 public class Sketch extends PApplet {
-	
-	
+float PLRcircleX = 150;
+float PLRcirclevelX;	
+float PLRcircleY = 200;
+float PLRcirclevelY;
+boolean up = false;
+boolean down = false;
+boolean left = false;
+boolean right = false;
+	float[] circleY = new float[25];
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(300, 300);
   }
 
   /** 
@@ -16,21 +24,78 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+ 
+    
+      for (int i = 0; i < circleY.length; i++) {
+        circleY[i] = random(height);
+
+    }
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
+  
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
+    
+    background(50);
+    ellipse(PLRcircleX, PLRcircleY, 10, 10);
+    movement();
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+  for (int i = 0; i < circleY.length; i++) {
+    float circleX = width * i / circleY.length;
+    ellipse(circleX, circleY[i], 25, 25);
+
+    circleY[i] ++;
+
+    if (circleY[i] > height) {
+      circleY[i] = 0;
+    }
+    }
   }
   
-  // define other methods down here.
-}
+      public void keyPressed() {
+        if (keyCode == UP) {
+          up = true;
+        }
+        else if (keyCode == DOWN) {
+          down = true;
+        }
+        else if (keyCode == LEFT) {
+          left = true;
+        }
+        else if (keyCode == RIGHT) {
+          right = true;
+        }
+      }
+      public void keyReleased() {
+        if (keyCode == UP) {
+          up = false;
+        }
+        else if (keyCode == DOWN) {
+          down = false;
+        }
+        else if (keyCode == LEFT) {
+          left = false;
+        }
+        else if (keyCode == RIGHT) {
+          right = false;
+        }
+    }
+    public void movement(){
+      if (up) {
+        PLRcircleY--;
+      }
+    
+      
+      if (down) {
+        PLRcircleY++;
+      }
+      
+      if (left) {
+        PLRcircleX--;
+      }
+      
+      if (right) {
+        PLRcircleX++;
+      }
+    }
+  }
+
