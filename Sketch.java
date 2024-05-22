@@ -6,10 +6,12 @@ float PLRcircleX = 150;
 float PLRcirclevelX;	
 float PLRcircleY = 200;
 float PLRcirclevelY;
+float circleX;
 boolean up = false;
 boolean down = false;
 boolean left = false;
 boolean right = false;
+boolean speedup = false;
 	float[] circleY = new float[25];
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -25,7 +27,7 @@ boolean right = false;
    */
   public void setup() {
  
-    
+  
       for (int i = 0; i < circleY.length; i++) {
         circleY[i] = random(height);
 
@@ -34,17 +36,21 @@ boolean right = false;
 
   
   public void draw() {
+   
     
     background(50);
     ellipse(PLRcircleX, PLRcircleY, 10, 10);
     movement();
 
   for (int i = 0; i < circleY.length; i++) {
-    float circleX = width * i / circleY.length;
+    circleX = width * i / circleY.length;
     ellipse(circleX, circleY[i], 25, 25);
-
+    if(speedup == true){
+      circleY[(i*2) /4 ]++;
+    }
+    else{
     circleY[i] ++;
-
+    }
     if (circleY[i] > height) {
       circleY[i] = 0;
     }
@@ -52,31 +58,37 @@ boolean right = false;
   }
   
       public void keyPressed() {
-        if (keyCode == UP) {
+        if (key == 'w') {
           up = true;
         }
-        else if (keyCode == DOWN) {
+        else if (key == 's') {
           down = true;
         }
-        else if (keyCode == LEFT) {
+        else if (key == 'a') {
           left = true;
         }
-        else if (keyCode == RIGHT) {
+        else if (key == 'd') {
           right = true;
+        }
+        else if (keyCode == DOWN){
+          speedup = true;
         }
       }
       public void keyReleased() {
-        if (keyCode == UP) {
+        if (key == 'w') {
           up = false;
         }
-        else if (keyCode == DOWN) {
+        else if (key == 's') {
           down = false;
         }
-        else if (keyCode == LEFT) {
+        else if (key == 'a') {
           left = false;
         }
-        else if (keyCode == RIGHT) {
+        else if (key == 'd') {
           right = false;
+        }
+        else if(keyCode == DOWN){
+          speedup = false;
         }
     }
     public void movement(){
