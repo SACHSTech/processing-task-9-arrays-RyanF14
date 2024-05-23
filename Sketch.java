@@ -3,7 +3,7 @@ import processing.core.PApplet;
 
 public class Sketch extends PApplet {
 int snowamount = 15;
-float PLRcircleX = 10;
+float PLRcircleX = -5;
 float PLRcirclevelX;	
 float PLRcircleY = 280;
 int snowCount = 15;
@@ -189,14 +189,17 @@ if(dist(PLRcircleX, PLRcircleY, circleX[i], circleY[i]) < 20 && !collision){
      * Resets the position of the player character to its starting value after death, or at the start of the game
      */
     public void resetPlayer(){
-     PLRcircleX = 10;
+     PLRcircleX = -5;
     
     PLRcircleY = 280;
     }
+    /**
+     * This method handles mouse input, specifically making the snowballs dissappear when the item is clicked on by the user
+     */
     public void mouseClicked(){
       for(int i = 0; i < snowamount; i++){
        
-          if(!snowhide[i] && dist(mouseX, mouseY, circleX[i], circleY[i]) == 20){
+          if(!snowhide[i] && dist(mouseX, mouseY, circleX[i], circleY[i]) < 10){
                 if(mousePressed){
                   snowhide[i] = true;
                 }
@@ -205,7 +208,7 @@ if(dist(PLRcircleX, PLRcircleY, circleX[i], circleY[i]) < 20 && !collision){
   }      
     }
     /**
-     * prints the number of lives remaining to the top right of the screen
+     * prints the number of lives remaining to the top right of the screena
      */
     public void printLives(){
       for(int i = 0; i < health; i++){
